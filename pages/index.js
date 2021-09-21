@@ -2,7 +2,7 @@ import * as React from "react";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import ProTip from "../src/settings/ProTip";
+// import ProTip from "../src/settings/ProTip";
 // import Link from "../src/Link";
 import Copyright from "../src/settings/Copyright";
 import { Button } from "@mui/material";
