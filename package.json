@@ -9,6 +9,7 @@
     "@emotion/server": "latest",
     "@emotion/styled": "latest",
     "@material-ui/core": "^4.12.3",
+    "@mui/icons-material": "^5.0.1",
     "@mui/material": "next",
     "@mui/x-data-grid": "^4.0.0",
     "clsx": "latest",
