@@ -58,9 +58,9 @@ export default function Index() {
       body: "Country List",
     },
     {
-      url: "/other",
-      title: "Other",
-      body: "Other List",
+      url: "/item",
+      title: "Item",
+      body: "Item List",
     },
   ];
 
