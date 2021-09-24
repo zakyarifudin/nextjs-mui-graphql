@@ -10,6 +10,10 @@ import {
   Box,
 } from "@mui/material";
 import { useState } from "react";
+import CartDetail from "../src/components/CartDetail.js";
+import numberFormatID from "../lib/numberFormatID.js";
+import Image from "next/image";
+import LoadingSVG from "../src/assets/loading.svg";
 
 export const ALL_COUNTRIES_QUERY = gql`
   query countries($eq: String!) {
@@ -46,6 +50,7 @@ export default function CountryList() {
     grandTotal: 0,
   };
   const [cart, setCart] = useState(initCart);
+  const [focus, setFocus] = useState({ id: null });
 
   const handleAddCart = (item) => {
     const { items } = cart;
@@ -125,11 +130,16 @@ export default function CountryList() {
   });
 
   if (error) return <ErrorMessage message="Error loading." />;
-  if (loading) return <div style={{ margin: "auto" }}>Loading....</div>;
+  if (loading)
+    return (
+      <div style={{ margin: "auto", width: 200 }}>
+        <Image src={LoadingSVG} />
+      </div>
+    );
 
   const { countries } = data;
-  console.log(cart);
-
+  // console.log(cart);
+  console.log(focus);
   // console.log(countries);
 
   let menuData = [];
@@ -162,7 +172,13 @@ export default function CountryList() {
               lg={3}
               key={item.id}
             >
-              <Card onClick={() => handleAddCart(item)}>
+              <Card
+                onClick={() => {
+                  handleAddCart(item);
+                  setFocus({ id: item.id });
+                }}
+                sx={item.id === focus.id ? { border: "3px solid #000000" } : {}}
+              >
                 <Box sx={{ height: 150 }}>
                   <CardContent>
                     <Typography variant="h6" component="div" align="center">
@@ -172,7 +188,7 @@ export default function CountryList() {
                       {item.capital}
                     </Typography>
                     <Typography variant="caption" align="center">
-                      Rp. {item.price}
+                      Rp {numberFormatID(item.price)}
                     </Typography>
                   </CardContent>
                 </Box>
@@ -180,6 +196,8 @@ export default function CountryList() {
             </Grid>
           ))}
         </Grid>
+
+        <CartDetail cart={cart} />
       </Container>
     </div>
   );
