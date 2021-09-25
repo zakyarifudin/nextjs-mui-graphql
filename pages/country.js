@@ -7,6 +7,7 @@ import {
   Card,
   CardContent,
   CardActions,
+  CardActionArea,
   Box,
 } from "@mui/material";
 import { useState } from "react";
@@ -50,7 +51,6 @@ export default function CountryList() {
     grandTotal: 0,
   };
   const [cart, setCart] = useState(initCart);
-  const [focus, setFocus] = useState({ id: null });
 
   const handleAddCart = (item) => {
     const { items } = cart;
@@ -139,7 +139,6 @@ export default function CountryList() {
 
   const { countries } = data;
   // console.log(cart);
-  console.log(focus);
   // console.log(countries);
 
   let menuData = [];
@@ -175,23 +174,23 @@ export default function CountryList() {
               <Card
                 onClick={() => {
                   handleAddCart(item);
-                  setFocus({ id: item.id });
                 }}
-                sx={item.id === focus.id ? { border: "3px solid #000000" } : {}}
               >
-                <Box sx={{ height: 150 }}>
-                  <CardContent>
-                    <Typography variant="h6" component="div" align="center">
-                      {item.country}
-                    </Typography>
-                    <Typography variant="body1" align="center" gutterBottom>
-                      {item.capital}
-                    </Typography>
-                    <Typography variant="caption" align="center">
-                      Rp {numberFormatID(item.price)}
-                    </Typography>
-                  </CardContent>
-                </Box>
+                <CardActionArea>
+                  <Box sx={{ height: 150 }}>
+                    <CardContent>
+                      <Typography variant="h6" component="div" align="center">
+                        {item.country}
+                      </Typography>
+                      <Typography variant="body1" align="center" gutterBottom>
+                        {item.capital}
+                      </Typography>
+                      <Typography variant="caption" align="center">
+                        Rp {numberFormatID(item.price)}
+                      </Typography>
+                    </CardContent>
+                  </Box>
+                </CardActionArea>
               </Card>
             </Grid>
           ))}
